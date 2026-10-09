@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="REDNOX ร้านดิจิทัล Blox Fruits จำหน่ายผลปีศาจ เกมพาส และบริการในเกม">
+<meta name="robots" content="index,follow">
+<title>REDNOX — ร้านดิจิทัลมืดสนิท</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050203;--ink:#f3e9ea;--mute:#9b8387;--red:#ff1f35;--deep:#5c0811;--line:#2a1115;--ok:#35e0a8;
+--d:'Bebas Neue','Prompt',Impact,sans-serif;box-sizing:border-box}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:'Prompt','Noto Sans Thai',system-ui,sans-serif;min-height:100vh;
+background-image:repeating-linear-gradient(0deg,transparent 0 3px,#ffffff04 3px 4px)}
+button{font-family:inherit;color:inherit;cursor:pointer}
+/* rail */
+.rail{position:fixed;left:0;top:0;bottom:0;width:92px;border-right:1px solid var(--line);background:#080304;display:flex;flex-direction:column;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) 0 18px;gap:6px;z-index:5}
+.mark{font-family:var(--d);font-size:30px;color:var(--red);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:6px;margin-bottom:18px;text-shadow:0 0 18px #ff1f3577}
+.rail button{width:76px;background:none;border:0;padding:10px 4px;border-radius:12px;color:var(--mute);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:4px;line-height:1.2}
+.rail button b{font-size:19px;font-weight:400}
+.rail button.on{color:var(--ink);background:linear-gradient(90deg,#ff1f3533,transparent);box-shadow:inset 3px 0 var(--red)}
+main{margin-left:92px;padding:26px clamp(16px,4vw,48px) 80px;max-width:1240px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+.top small{color:var(--mute);font-size:13px}
+.gauge{display:flex;align-items:center;gap:12px;padding:8px 18px;border:1px solid var(--line);border-radius:4px;background:#0b0406;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.gauge span{font-size:11px;color:var(--mute)}
+.gauge strong{font-family:var(--d);font-size:28px;letter-spacing:1px;color:var(--ok)}
+.page{display:none}.page.on{display:block}
+/* hero */
+.hero{position:relative;padding:44px 0 36px;border-bottom:1px solid var(--line);overflow:hidden}
+.hero h1{font-family:var(--d);font-size:clamp(90px,19vw,230px);line-height:.82;letter-spacing:4px;color:transparent;-webkit-text-stroke:2px var(--red);position:relative}
+.hero h1 em{font-style:normal;color:var(--red);-webkit-text-stroke:0;text-shadow:0 0 40px #ff1f35aa}
+.hero:after{content:"";position:absolute;left:0;right:0;top:54%;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);box-shadow:0 0 24px 4px #ff1f3599;animation:scan 5s ease-in-out infinite}
+@keyframes scan{0%,100%{top:20%}50%{top:78%}}
+.hero p{max-width:520px;margin-top:22px;color:#cdb8bb;font-size:15px;line-height:1.7;position:relative;z-index:1}
+.hero .go{margin-top:22px;position:relative;z-index:1}
+.go{background:var(--red);border:0;color:#1b0207;font-weight:600;padding:13px 28px;font-size:14px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+.ghost{background:none;border:1px solid var(--line);padding:6px 14px;font-size:12px;color:var(--mute)}
+.ghost.on{border-color:var(--red);color:var(--ink);background:#2a0a10}
+.nums{display:flex;gap:0;flex-wrap:wrap;margin:26px 0}
+.nums div{flex:1;min-width:140px;padding:6px 20px;border-left:2px solid var(--red)}
+.nums strong{font-family:var(--d);font-size:46px;font-weight:400;display:block;line-height:1}
+.nums span{font-size:12px;color:var(--mute)}
+h2{font-family:var(--d);font-weight:400;font-size:34px;letter-spacing:2px;margin:30px 0 14px;display:flex;align-items:baseline;gap:14px}
+h2 small{font-family:'Prompt';font-size:13px;color:var(--mute);letter-spacing:0}
+/* tickets */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+.tk{display:flex;min-height:132px;background:#0e0508;border:1px solid var(--line);position:relative;
+-webkit-mask:radial-gradient(circle 9px at 96px 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 9px at 96px 100%,#0000 98%,#000) bottom/100% 51% no-repeat;
+mask:radial-gradient(circle 9px at 96px 0,#0000 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 9px at 96px 100%,#0000 98%,#000) bottom/100% 51% no-repeat}
+.tk .st{width:96px;display:grid;place-items:center;font-size:38px;background:linear-gradient(160deg,var(--deep),#12060a);border-right:2px dashed #ff1f3555}
+.tk .bd{flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.tk h3{font-size:15px;font-weight:500}.tk p{font-size:12px;color:var(--mute);flex:1;line-height:1.5}
+.tk .r{display:flex;justify-content:space-between;align-items:center}
+.pr{font-family:var(--d);font-size:30px;color:var(--red);letter-spacing:1px}
+.buy{background:none;border:1px solid var(--red);color:var(--red);padding:5px 16px;font-size:13px;font-weight:500}
+.buy:hover{background:var(--red);color:#1b0207}
+/* topup */
+.two{display:grid;grid-template-columns:1.1fr 1fr;gap:26px}
+.box{border:1px solid var(--line);background:#0b0406;padding:22px}
+.lb{font-size:12px;color:var(--mute);margin:16px 0 8px}.lb:first-child{margin-top:0}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;background:#12070a;border:1px solid var(--line);padding:13px 14px;font-size:14px}
+.opt.on{border-color:var(--red);background:#2a0a10;box-shadow:inset 3px 0 var(--red)}
+.amts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.amts .ghost{padding:10px;font-size:14px}
+input{width:100%;margin-top:10px;padding:12px;background:#050203;border:1px solid var(--line);color:var(--ink);font:inherit}
+input:focus{outline:1px solid var(--red)}select{width:100%;padding:12px;background:#050203;border:1px solid var(--line);color:var(--ink);font:inherit}
+.payinfo{margin-top:14px;padding:14px;border:1px solid var(--line);background:#080304;display:none}
+.payinfo strong{color:var(--ink)}.payinfo .muted{font-size:12px;color:var(--mute);line-height:1.7}
+.qrwrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:10px}
+#ppQr{background:#fff;padding:10px;min-width:220px;min-height:220px;display:grid;place-items:center}
+#ppQr img,#ppQr canvas{max-width:100%;height:auto}
+.fieldgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.fieldgrid label{display:block;color:var(--mute);font-size:12px;margin-bottom:5px}
+.adminnote{font-size:12px;color:var(--mute);line-height:1.7;margin-top:12px}
+@media(max-width:650px){.fieldgrid{grid-template-columns:1fr}}
+/* history */
+.sum{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:16px;padding:16px 20px;border:1px solid var(--line);background:#0b0406}
+.sum strong{font-family:var(--d);font-size:38px;font-weight:400;display:block;line-height:1}
+.sum span{font-size:12px;color:var(--mute)}
+.rc{display:grid;grid-template-columns:120px 1fr auto;gap:14px;align-items:center;padding:14px 18px;border:1px solid var(--line);border-bottom:0;background:#0b0406;font-size:13px}
+.rc:last-child{border-bottom:1px solid var(--line)}
+.rc code{font-family:var(--d);font-size:17px;letter-spacing:1px;color:var(--red)}
+.rc small{display:block;color:var(--mute);font-size:11px;margin-top:2px}
+.rc b{font-family:var(--d);font-size:24px;font-weight:400;letter-spacing:1px}
+.plus{color:var(--ok)}.minus{color:var(--ink)}
+.empty{padding:40px;text-align:center;border:1px dashed var(--line);color:var(--mute);font-size:14px}
+.empty button{margin-top:14px}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);padding:12px 22px;background:#1b0709;border:1px solid var(--red);font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9;white-space:nowrap}
+.toast.show{opacity:1}
+#auth{position:fixed;inset:0;z-index:20;background:radial-gradient(700px 400px at 50% 0,#3a0710,transparent),var(--bg);display:none;place-items:center;padding:20px;overflow:auto}#auth.show{display:grid}.al{width:100%;max-width:400px}.al h1{font-family:var(--d);font-weight:400;font-size:clamp(70px,22vw,120px);line-height:.85;color:transparent;-webkit-text-stroke:2px var(--red);letter-spacing:4px;margin-bottom:8px}.al h1 em{font-style:normal;color:var(--red);-webkit-text-stroke:0;text-shadow:0 0 30px #ff1f35aa}.al .box{margin-top:18px}.tabs{display:flex;margin-bottom:16px;border-bottom:1px solid var(--line)}.tabs button{flex:1;background:none;border:0;padding:10px;color:var(--mute);font-size:14px;border-bottom:2px solid transparent}.tabs button.on{color:var(--ink);border-color:var(--red)}.err{color:var(--red);font-size:12px;min-height:18px;margin-top:10px}button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media(max-width:820px){
+.rail{top:auto;width:100%;height:auto;flex-direction:row;justify-content:space-around;border-right:0;border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+.mark{display:none}.rail button{width:auto;flex:1;font-size:10px;padding:6px 2px}
+main{margin-left:0;padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:100px}
+.two{grid-template-columns:1fr}.rc{grid-template-columns:1fr auto}.rc>div:first-child{grid-column:1/-1}
+.toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+@media(prefers-reduced-motion:reduce){.hero:after{animation:none}}
+</style>
+</head>
+<body>
+<aside class="rail">
+  <div class="mark">REDNOX</div>
+  <button data-p="home" class="on"><b>◢</b>หน้าแรก</button>
+  <button data-p="shop"><b>▣</b>ร้านค้า</button>
+  <button data-p="topup"><b>＋</b>เติมเงิน</button>
+  <button data-p="buys"><b>≡</b>ประวัติซื้อ</button>
+  <button data-p="tops"><b>↧</b>ประวัติเติม</button>
+  <button data-p="admin" id="admBtn" style="display:none"><b>⚙</b>หลังบ้าน</button>
+</aside>
+
+<main>
+  <div class="top">
+    <small>REDNOX · ร้าน Blox Fruits เปิด 24 ชม.</small>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="ghost" id="who"></button><div class="gauge"><span>ยอดคงเหลือ</span><strong id="bal">฿0</strong></div></div>
+  </div>
+
+  <section class="page on" id="home">
+    <div class="hero">
+      <h1>RED<em>NOX</em></h1>
+      <p>ร้านขายผลปีศาจ เกมพาส Beli และบริการเก็บเลเวลสำหรับ Blox Fruits รับของไว เติมเงินอัตโนมัติ มีประวัติทุกรายการ</p>
+      <button class="go" data-p="shop">เข้าร้านค้า</button>
+    </div>
+    <div class="nums">
+      <div><strong id="nUsers">12</strong><span>ผู้ใช้งาน</span></div>
+      <div><strong id="nProd"></strong><span>สินค้าพร้อมส่ง</span></div>
+      <div><strong id="nSold"></strong><span>คำสั่งซื้อของคุณ</span></div>
+      <div><strong id="nSpent"></strong><span>ใช้จ่ายรวม</span></div>
+    </div>
+    <h2>หมวดหมู่ <small>เลือกดูตามประเภท</small></h2><div class="grid" id="catTiles" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-bottom:10px"></div><h2>ขายดี <small>3 อันดับแรก</small></h2>
+    <div class="grid" id="hot"></div>
+  </section>
+
+  <section class="page" id="shop">
+    <h2>ร้านค้า <small>กดซื้อแล้วหักยอดทันที</small></h2>
+    <div id="catDesc" style="color:var(--mute);font-size:13px;margin-bottom:12px"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px" id="chips"></div>
+    <div class="grid" id="list"></div>
+  </section>
+
+  <section class="page" id="topup">
+    <h2>เติมเงิน <small>ระบบจำลองสำหรับทดลองใช้</small></h2>
+    <div class="two">
+      <div class="box">
+        <div class="lb">ช่องทางชำระเงิน</div>
+        <div class="opts" id="methods">
+          <button class="opt on" data-m="พร้อมเพย์">พร้อมเพย์ QR</button>
+          <button class="opt" data-m="TrueMoney อั่งเปา">🧧 TrueMoney อั่งเปา (ซองของขวัญ)</button>
+          <button class="opt" data-m="โอนธนาคาร">โอนผ่านธนาคาร</button>
+        </div>
+        <div id="aoBox" style="display:none"><div class="lb">ลิงก์ซองอั่งเปา</div><input id="aoLink" type="url" placeholder="https://gift.truemoney.com/campaign/?v=..." style="margin-top:0"><div style="font-size:11px;color:var(--mute);margin-top:6px">ระบบจะส่งคำขอให้ตรวจสอบก่อน ยังไม่เติมยอดจากลิงก์เพียงอย่างเดียว</div></div>
+        <div id="bankBox" class="payinfo"><strong>ข้อมูลบัญชีรับโอน</strong><div id="bankDetails" class="muted" style="margin-top:6px"></div></div>
+        <div id="ppBox" class="payinfo"><strong>พร้อมเพย์ QR</strong><div class="muted">สแกน QR ด้วยแอปธนาคาร จากนั้นกรอกยอดตามที่ต้องการเติม</div><div class="qrwrap"><div id="ppQr"></div><div class="muted" id="ppDetails"></div></div><div class="adminnote">ตรวจสอบชื่อผู้รับและยอดเงินในแอปธนาคารก่อนยืนยันทุกครั้ง</div></div>
+        <div id="amtBox"><div class="lb" id="amtLb">จำนวนเงิน</div>
+        <div class="amts" id="amts"></div>
+        <input id="amt" type="number" min="10" placeholder="หรือกรอกเอง (ขั้นต่ำ ฿10)"></div>
+        <button class="go" style="width:100%;margin-top:18px" id="pay">ส่งคำขอเติมเงิน</button>
+        <div class="adminnote">คำขอจะยังไม่เพิ่มยอดเงินจนกว่าจะมีการตรวจสอบการชำระเงินจริง</div>
+      </div>
+      <div class="box"><div class="lb">เติมล่าสุด</div><div id="lastTop"></div>
+        <button class="ghost" style="margin-top:14px" data-p="tops">ดูประวัติทั้งหมด</button></div>
+    </div>
+  </section>
+
+  <section class="page" id="buys">
+    <h2>ประวัติการซื้อสินค้า <small>รายการทั้งหมดของคุณ</small></h2>
+    <div class="sum"><div><strong id="bN">0</strong><span>คำสั่งซื้อ</span></div><div><strong id="bT">฿0</strong><span>ยอดใช้จ่ายรวม</span></div></div>
+    <div id="buyList"></div>
+  </section>
+
+  <section class="page" id="tops">
+    <h2>ประวัติการเติมเงิน <small>รายการทั้งหมดของคุณ</small></h2>
+    <div class="sum"><div><strong id="tN">0</strong><span>ครั้ง</span></div><div><strong id="tT">฿0</strong><span>เติมรวม</span></div></div>
+    <div id="topList"></div>
+  </section>
+<section class="page" id="admin">
+    <h2>หลังบ้าน <small>จัดการร้าน REDNOX</small></h2>
+    <div class="nums" id="aStats"></div>
+    <h2>ตั้งค่าเว็บไซต์และรับเงิน <small>แก้ข้อมูลร้านและบัญชีรับโอน</small></h2>
+    <div class="box">
+      <div class="fieldgrid">
+        <div><label for="setShopName">ชื่อร้าน / หัวเว็บ</label><input id="setShopName" placeholder="REDNOX" style="margin:0"></div>
+        <div><label for="setShopDesc">ข้อความแถบบน</label><input id="setShopDesc" placeholder="ร้าน Blox Fruits เปิด 24 ชม." style="margin:0"></div>
+        <div style="grid-column:1/-1"><label for="setHeroText">คำอธิบายหน้าแรก</label><input id="setHeroText" placeholder="รายละเอียดร้าน" style="margin:0"></div>
+        <div><label for="setBankName">ธนาคาร</label><input id="setBankName" placeholder="เช่น กสิกรไทย" style="margin:0"></div>
+        <div><label for="setBankOwner">ชื่อบัญชี</label><input id="setBankOwner" placeholder="ชื่อเจ้าของบัญชี" style="margin:0"></div>
+        <div><label for="setBankAccount">เลขบัญชี</label><input id="setBankAccount" inputmode="numeric" placeholder="กรอกเลขบัญชีรับโอน" style="margin:0"></div>
+        <div><label for="setPromptPayType">ประเภท ID สำหรับพร้อมเพย์ QR</label><select id="setPromptPayType" style="margin:0"><option value="phone">เบอร์มือถือ 10 หลัก</option><option value="taxid">เลขประจำตัวผู้เสียภาษี/บัตรประชาชน 13 หลัก</option><option value="ewallet">e-Wallet ID 15 หลัก</option></select></div>
+        <div style="grid-column:1/-1"><label for="setPromptPayId">หมายเลขพร้อมเพย์ (QR จะสร้างจากหมายเลขนี้)</label><input id="setPromptPayId" inputmode="numeric" placeholder="เบอร์มือถือ / ID พร้อมเพย์" style="margin:0"></div>
+      </div>
+      <button class="go" id="saveSettings" style="margin-top:16px">บันทึกการตั้งค่า</button>
+      <div class="adminnote">การตั้งค่านี้บันทึกไว้ในเบราว์เซอร์เครื่องนี้เท่านั้น เพราะไฟล์ HTML ปัจจุบันยังไม่มีฐานข้อมูลกลาง การรับเงินอัตโนมัติจริงต้องเชื่อมต่อ API ฝั่งเซิร์ฟเวอร์ที่ตรวจสอบธุรกรรมได้ ห้ามใส่ API secret ลงใน HTML</div>
+    </div>
+    <h2>คำขอเติมเงินรอตรวจสอบ <small>อนุมัติหลังตรวจยอดเงินจริงแล้วเท่านั้น</small></h2><div id="aPending"></div>
+    <h2>หมวดหมู่ <small>เพิ่ม / ลบหมวดสินค้า</small></h2><div class="box"><div id="aCats"></div><div style="display:grid;grid-template-columns:70px 1fr auto;gap:8px;margin-top:12px"><input id="cI" placeholder="🍎" style="margin:0"><input id="cN" placeholder="ชื่อหมวดใหม่" style="margin:0"><button class="go" id="cAdd">เพิ่ม</button></div></div><h2>สินค้า <small>แก้ราคา เปลี่ยนรูปได้ทันที</small></h2>
+    <div class="box"><div id="aProd"></div>
+      <div class="lb">เพิ่มสินค้าใหม่</div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px"><input id="pN" placeholder="ชื่อสินค้า" style="margin:0"><input id="pP" type="number" placeholder="ราคา" style="margin:0"><select id="pC" style="margin:0"></select></div>
+      <input id="pD" placeholder="คำอธิบายสินค้า"><div class="lb">รูปสินค้า (ไม่บังคับ)</div><input id="pI" type="file" accept="image/*" style="margin:0">
+      <button class="go" style="margin-top:12px" id="pAdd">เพิ่มสินค้า</button></div>
+    <h2>สมาชิก</h2><div id="aUsers"></div>
+    <h2>คำสั่งซื้อล่าสุด</h2><div id="aOrders"></div>
+    <h2>เติมเงินล่าสุด</h2><div id="aTops"></div>
+  </section>
+</main>
+<div id="auth"><div class="al"><h1>RED<em>NOX</em></h1><small style="color:var(--mute)">เข้าสู่ระบบเพื่อซื้อสินค้าและเติมเงิน</small><div class="box"><div class="tabs"><button class="on" id="tIn">เข้าสู่ระบบ</button><button id="tUp">สมัครสมาชิก</button></div><div class="lb">ชื่อผู้ใช้</div><input id="aU" autocomplete="username" style="margin-top:0"><div class="lb">รหัสผ่าน</div><input id="aP" type="password" autocomplete="current-password" style="margin-top:0"><div id="cfBox" style="display:none"><div class="lb">ยืนยันรหัสผ่าน</div><input id="aC" type="password" style="margin-top:0"></div><div class="err" id="aErr"></div><button class="go" style="width:100%;margin-top:6px" id="aGo">เข้าสู่ระบบ</button><button class="ghost" style="width:100%;margin-top:10px" id="aX">กลับไปดูสินค้า</button></div></div></div><div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+var P=[
+{n:"REDNOX Pro Panel",c:"แผงควบคุม",p:299,i:"🛰",d:"แผงจัดการร้านอัตโนมัติ ใช้งานได้ทันที"},
+{n:"Dark Theme Pack",c:"ธีม",p:149,i:"🎨",d:"ชุดธีมดำแดง 12 แบบ พร้อมไฟล์ต้นฉบับ"},
+{n:"Source Code Bundle",c:"ซอร์สโค้ด",p:499,i:"💾",d:"โค้ดเว็บร้านค้าครบชุด แก้ไขได้เอง"},
+{n:"Auto Top-up Module",c:"แผงควบคุม",p:349,i:"⚡",d:"โมดูลเติมเงินอัตโนมัติหลายช่องทาง"},
+{n:"Crimson UI Kit",c:"ธีม",p:199,i:"🩸",d:"ชุดคอมโพเนนต์ UI โทนแดงเข้ม"},
+{n:"Landing Page Starter",c:"ซอร์สโค้ด",p:99,i:"🚀",d:"เทมเพลตหน้าแรกพร้อมใช้ โหลดเร็ว"}];
+var S={bal:0,buys:[],tops:[]},cat="ทั้งหมด",meth="พร้อมเพย์";
+var settings={shopName:"REDNOX",shopDesc:"ร้าน Blox Fruits เปิด 24 ชม.",heroText:"ร้านขายผลปีศาจ เกมพาส Beli และบริการเก็บเลเวลสำหรับ Blox Fruits รับของไว เติมเงินอัตโนมัติ มีประวัติทุกรายการ",bankName:"",bankOwner:"",bankAccount:"",promptPayType:"phone",promptPayId:""};
+var requests=[];try{var _st=JSON.parse(localStorage.getItem("rn_settings")||"null");if(_st)settings=Object.assign(settings,_st);requests=JSON.parse(localStorage.getItem("rn_requests")||"[]")}catch(e){}
+var U={},cur=null;try{U=JSON.parse(localStorage.getItem("rn_users")||"{}");cur=localStorage.getItem("rn_cur")}catch(e){}
+function hp(s){var h=5381;for(var i=0;i<s.length;i++)h=(h*33^s.charCodeAt(i))>>>0;return h.toString(36)}
+if(cur&&U[cur])S=U[cur].d;else cur=null;
+var adm=cur=="rednox";
+P=[{n:'Dragon Fruit',c:'ผลปีศาจ',p:349,i:'🐉',d:'ผลมังกร สายโจมตีระยะไกล ส่งในเกมทันที'},{n:'Leopard Fruit',c:'ผลปีศาจ',p:299,i:'🐆',d:'ผลเสือดาว ความเร็วสูง สายต่อสู้ระยะประชิด'},{n:'Kitsune Fruit',c:'ผลปีศาจ',p:449,i:'🦊',d:'ผลจิ้งจอก ท่าไฟสวยและแรง'},{n:'Buddha Fruit',c:'ผลปีศาจ',p:129,i:'🗿',d:'ผลพระพุทธ ทนทาน เหมาะเก็บเลเวล'},{n:'2x Money Gamepass',c:'เกมพาส',p:99,i:'🎫',d:'เงินเกมได้เพิ่มสองเท่า'},{n:'Fruit Notifier',c:'เกมพาส',p:79,i:'🔔',d:'แจ้งเตือนเมื่อผลปีศาจเกิดในเซิร์ฟเวอร์'},{n:'Beli 1,000,000',c:'Beli',p:59,i:'💰',d:'เงินเกม Beli หนึ่งล้าน'},{n:'Beli 5,000,000',c:'Beli',p:249,i:'💰',d:'เงินเกม Beli ห้าล้าน คุ้มกว่า'},{n:'Boost Level 1-700',c:'บริการเก็บเลเวล',p:199,i:'🚀',d:'เก็บเลเวลให้จนถึง 700'}];var C=[{n:'ผลปีศาจ',i:'🍎'},{n:'เกมพาส',i:'🎫'},{n:'Beli',i:'💰'},{n:'บริการเก็บเลเวล',i:'🚀'}];
+try{var sp=JSON.parse(localStorage.getItem("rn_prods2")||"null");if(sp)P=sp;var sc=JSON.parse(localStorage.getItem("rn_cats")||"null");if(sc)C=sc}catch(e){}
+function save(){if(!cur)return;U[cur].d=S;try{localStorage.setItem("rn_users",JSON.stringify(U))}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+function fmt(n){return "฿"+n.toLocaleString()}
+function when(t){return new Date(t).toLocaleString("th-TH",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}
+function oid(p){return p+"-"+Math.random().toString(36).slice(2,8).toUpperCase()}
+function toast(t){var e=$("toast");e.textContent=t;e.className="toast show";setTimeout(function(){e.className="toast"},2200)}
+var pend=null;function go(p){if(p=="admin"&&!adm){toast("เฉพาะผู้ดูแลระบบ");return}if(p!="home"&&!cur){pend=p;$("auth").className="show";toast("กรุณาเข้าสู่ระบบก่อนเข้าใช้งาน");return}document.querySelectorAll(".page").forEach(function(e){e.classList.toggle("on",e.id==p)});
+ document.querySelectorAll(".rail button").forEach(function(b){b.classList.toggle("on",b.dataset.p==p)});scrollTo(0,0)}
+function tk(x,i){return '<div class="tk"><div class="st">'+(x.img?'<img src="'+x.img+'" alt="" style="width:100%;height:100%;object-fit:cover">':x.i)+'</div><div class="bd"><h3>'+x.n+'</h3><p>'+x.d+'</p><div class="r"><span class="pr">'+fmt(x.p)+'</span><button class="buy" data-b="'+i+'">ซื้อเลย</button></div></div></div>'}
+function rows(a,kind,empty,to){
+ if(!a.length)return '<div class="empty">'+empty+'<br><button class="go" data-p="'+to+'">'+(kind=="b"?"ไปเลือกสินค้า":"เติมเงินตอนนี้")+'</button></div>';
+ return a.map(function(r){return '<div class="rc"><div><code>'+r.id+'</code><small>'+when(r.t)+'</small></div><div>'+(kind=="b"?r.n:r.m)+'<small>'+(kind=="b"?'สำเร็จ · ส่งสินค้าแล้ว':'อนุมัติแล้ว · ตรวจสอบยอดเงินจริง')+'</small></div><b class="'+(kind=="b"?'minus':'plus')+'">'+(kind=="b"?'−':'+')+fmt(r.a)+'</b></div>'}).join("")}
+function render(){if(adm)renderAdmin();
+ var spent=S.buys.reduce(function(a,b){return a+b.a},0),topped=S.tops.reduce(function(a,b){return a+b.a},0);
+ $("bal").textContent=fmt(S.bal);$("nProd").textContent=P.length;$("catTiles").innerHTML=C.map(function(c){var n=P.filter(function(p){return p.c==c.n}).length;return '<button class="opt" data-ct="'+esc(c.n)+'" style="text-align:center"><div style="font-size:30px">'+esc(c.i)+'</div>'+esc(c.n)+'<small style="display:block;color:var(--mute)">'+(c.d?esc(c.d)+' · ':'')+n+' รายการ</small></button>'}).join("");$("nSold").textContent=S.buys.length;$("nSpent").textContent=fmt(spent);
+ $("hot").innerHTML=P.slice(0,3).map(function(x,i){return tk(x,i)}).join("");
+ var cs=["ทั้งหมด"].concat(C.map(function(c){return c.n}));var cd=C.filter(function(c){return c.n==cat})[0];$("catDesc").textContent=cd&&cd.d?cd.d:"";
+ $("chips").innerHTML=cs.map(function(c){return '<button class="ghost'+(c==cat?' on':'')+'" data-c="'+c+'">'+c+'</button>'}).join("");
+ $("list").innerHTML=P.map(function(x,i){return cat=="ทั้งหมด"||x.c==cat?tk(x,i):""}).join("");
+ $("bN").textContent=S.buys.length;$("bT").textContent=fmt(spent);$("tN").textContent=S.tops.length;$("tT").textContent=fmt(topped);
+ $("buyList").innerHTML=rows(S.buys,"b","ยังไม่มีการซื้อสินค้า","shop");
+ $("topList").innerHTML=rows(S.tops,"t","ยังไม่มีการเติมเงิน","topup");
+ $("lastTop").innerHTML=S.tops.length?rows(S.tops.slice(0,3),"t","","topup"):'<span style="color:var(--mute);font-size:13px">ยังไม่มีรายการ</span>';
+}
+$("amts").innerHTML=[50,100,300,500,1000,2000].map(function(a){return '<button class="ghost" data-a="'+a+'">'+fmt(a)+'</button>'}).join("");
+document.addEventListener("click",function(e){
+ var t=e.target.closest("button");if(!t)return;
+ if(t.dataset.p)go(t.dataset.p);
+ else if(t.dataset.ct){cat=t.dataset.ct;go("shop");render()}
+ else if(t.dataset.cd){var ci=+t.dataset.cd;if(P.some(function(p){return p.c==C[ci].n})){toast('ลบไม่ได้ ยังมีสินค้าในหมวดนี้');return}C.splice(ci,1);sv();render()}
+ else if(t.dataset.pd){P.splice(+t.dataset.pd,1);sv();render()}
+ else if(t.dataset.ua){var q=t.dataset.ua.split(":");U[q[0]].d.bal=Math.max(0,U[q[0]].d.bal+(+q[1]));saveU();render()}
+ else if(t.dataset.ud){delete U[t.dataset.ud];saveU();render()}
+ else if(t.dataset.c){cat=t.dataset.c;render()}
+ else if(t.dataset.a){$("amt").value=t.dataset.a;document.querySelectorAll("#amts .ghost").forEach(function(c){c.classList.toggle("on",c==t)});if(meth==="พร้อมเพย์")renderPromptPayQR()}
+ else if(t.dataset.m){meth=t.dataset.m;document.querySelectorAll("#methods .opt").forEach(function(c){c.classList.toggle("on",c==t)});refreshPaymentInfo()}
+ else if(t.dataset.b){var x=P[t.dataset.b];if(!cur){pend="shop";$("auth").className="show";toast("กรุณาเข้าสู่ระบบก่อนซื้อ");return}if(S.bal<x.p){toast("ยอดเงินไม่พอ กรุณาเติมเงินก่อน");go("topup");return}
+  S.bal-=x.p;S.buys.unshift({id:oid("ORD"),n:x.n,a:x.p,t:Date.now()});save();render();toast("ซื้อ "+x.n+" สำเร็จ")}
+  else if(t.dataset.ra){var rr=requests.find(function(r){return r.id===t.dataset.ra&&r.status==="pending"});if(!rr)return;var ai=document.querySelector('[data-rval="'+rr.id+'"]');var actual=parseFloat(ai&&ai.value);if(!Number.isFinite(actual)||actual<10){toast("กรอกยอดเงินจริงที่ตรวจสอบแล้ว");return}if(!U[rr.u]||!U[rr.u].d){toast("ไม่พบสมาชิกของคำขอนี้");return}U[rr.u].d.bal+=Math.round(actual*100)/100;U[rr.u].d.tops.unshift({id:rr.id,m:rr.m,a:Math.round(actual*100)/100,t:Date.now()});rr.status="approved";rr.approvedAmount=Math.round(actual*100)/100;rr.reviewedAt=Date.now();saveU();saveRequests();render();toast("อนุมัติหลังตรวจยอดเงินจริงแล้ว")}
+  else if(t.dataset.rj){var rj=requests.find(function(r){return r.id===t.dataset.rj&&r.status==="pending"});if(rj){rj.status="rejected";rj.reviewedAt=Date.now();saveRequests();render();toast("ปฏิเสธคำขอแล้ว")}}
+});
+$("pay").onclick=function(){var a=parseFloat($("amt").value);var ao=meth.indexOf("อั่งเปา")>-1;var link=$("aoLink").value.trim();if(!cur){pend="topup";$("auth").className="show";toast("กรุณาเข้าสู่ระบบก่อนส่งคำขอ");return}if(ao&&!/^https:\/\/gift\.truemoney\.com\/campaign\/\?v=[A-Za-z0-9]+/.test(link)){toast("ลิงก์ซองอั่งเปาไม่ถูกต้อง");return}
+  if(!Number.isFinite(a)||a<10){toast("กรอกยอดที่ต้องการเติมขั้นต่ำ ฿10");return}
+  var req={id:oid("REQ"),u:cur,m:meth,a:Math.round(a*100)/100,t:Date.now(),link:ao?link:"",status:"pending"};requests.unshift(req);saveRequests();$("amt").value="";$("aoLink").value="";render();refreshPaymentInfo();toast("ส่งคำขอแล้ว รอตรวจสอบยอดเงินจริง")};
+function saveRequests(){try{localStorage.setItem("rn_requests",JSON.stringify(requests))}catch(e){toast("บันทึกคำขอไม่สำเร็จ")}}
+function saveSettings(){try{localStorage.setItem("rn_settings",JSON.stringify(settings))}catch(e){toast("บันทึกการตั้งค่าไม่สำเร็จ")}}
+function tlv(id,value){value=String(value);return id+String(value.length).padStart(2,"0")+value}
+function crc16(str){var crc=0xFFFF;for(var i=0;i<str.length;i++){crc^=str.charCodeAt(i)<<8;for(var j=0;j<8;j++)crc=(crc&0x8000)?((crc<<1)^0x1021):(crc<<1);crc&=0xFFFF}return crc.toString(16).toUpperCase().padStart(4,"0")}
+function makePromptPayPayload(raw,type,amount){var digits=String(raw||"").replace(/\D/g,"");var sub="",tag="";if(type==="phone"){if(!/^0[0-9]{9}$/.test(digits))throw new Error("เบอร์พร้อมเพย์ต้องเป็นเบอร์มือถือ 10 หลักที่ขึ้นต้นด้วย 0");tag="01";sub="0066"+digits.slice(1)}else if(type==="taxid"){if(!/^[0-9]{13}$/.test(digits))throw new Error("หมายเลขพร้อมเพย์ประเภทนี้ต้องมี 13 หลัก");tag="02";sub=digits}else{if(!/^[0-9]{15}$/.test(digits))throw new Error("e-Wallet ID ต้องมี 15 หลัก");tag="03";sub=digits}var merchant=tlv("00","A000000677010111")+tlv(tag,sub);var payload=tlv("00","01")+tlv("01",amount>0?"12":"11")+tlv("29",merchant)+tlv("53","764")+tlv("58","TH");if(amount>0)payload+=tlv("54",Number(amount).toFixed(2));payload+="6304";return payload+crc16(payload)}
+function renderPromptPayQR(){var box=$("ppQr"),details=$("ppDetails");if(!box||!details)return;box.innerHTML="";details.textContent="";if(!settings.promptPayId){box.textContent="ยังไม่ได้ตั้งค่าหมายเลขพร้อมเพย์";details.textContent="ให้ผู้ดูแลกรอกหมายเลขในหน้า หลังบ้าน ก่อน";return}try{var a=parseFloat($("amt").value)||0;var payload=makePromptPayPayload(settings.promptPayId,settings.promptPayType,a);if(typeof QRCode==="undefined"){box.textContent="โหลดระบบสร้าง QR ไม่สำเร็จ กรุณาเชื่อมต่ออินเทอร์เน็ตแล้วโหลดใหม่";return}new QRCode(box,{text:payload,width:220,height:220,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});details.textContent="พร้อมเพย์: "+settings.promptPayId+(a>0?" · ยอด "+fmt(a):" · กรอกยอดในแอปธนาคาร")+(settings.bankOwner?" · ชื่อบัญชี "+settings.bankOwner:"")}catch(e){box.textContent=e.message}}
+function refreshPaymentInfo(){var ao=meth.indexOf("อั่งเปา")>-1,pp=meth==="พร้อมเพย์",bank=meth==="โอนธนาคาร";$("aoBox").style.display=ao?"block":"none";$("amtBox").style.display="block";$("amtLb").textContent=ao?"ยอดที่คาดว่าจะได้รับ (ต้องตรวจเงินจริงก่อนอนุมัติ)":"จำนวนเงินที่ชำระ";$("ppBox").style.display=pp?"block":"none";$("bankBox").style.display=bank?"block":"none";$("pay").textContent=ao?"ส่งลิงก์ซองให้ตรวจสอบ":"ส่งคำขอเติมเงิน";$("bankDetails").textContent="ธนาคาร: "+(settings.bankName||"ยังไม่ตั้งค่า")+" · ชื่อบัญชี: "+(settings.bankOwner||"ยังไม่ตั้งค่า")+" · เลขบัญชี: "+(settings.bankAccount||"ยังไม่ตั้งค่า");if(pp)renderPromptPayQR()}
+function applySettingsToPage(){document.querySelector(".top small").textContent=settings.shopName+" · "+settings.shopDesc;document.querySelector(".mark").textContent=settings.shopName;document.querySelector(".hero h1").textContent=settings.shopName;document.querySelector(".hero p").textContent=settings.heroText;document.title=settings.shopName+" — ร้านดิจิทัล";$("setShopName").value=settings.shopName;$("setShopDesc").value=settings.shopDesc;$("setHeroText").value=settings.heroText;$("setBankName").value=settings.bankName;$("setBankOwner").value=settings.bankOwner;$("setBankAccount").value=settings.bankAccount;$("setPromptPayType").value=settings.promptPayType;$("setPromptPayId").value=settings.promptPayId;refreshPaymentInfo()}
+$("saveSettings").onclick=function(){settings.shopName=$("setShopName").value.trim()||"REDNOX";settings.shopDesc=$("setShopDesc").value.trim();settings.heroText=$("setHeroText").value.trim();settings.bankName=$("setBankName").value.trim();settings.bankOwner=$("setBankOwner").value.trim();settings.bankAccount=$("setBankAccount").value.trim();settings.promptPayType=$("setPromptPayType").value;settings.promptPayId=$("setPromptPayId").value.trim();saveSettings();applySettingsToPage();toast("บันทึกการตั้งค่าแล้ว")};
+$("amt").addEventListener("input",function(){if(meth==="พร้อมเพย์")renderPromptPayQR()});
+render();applySettingsToPage();
+var reg=false;
+function showAuth(){$("auth").className=cur?"":"show"}
+function mode(r){reg=r;$("tIn").className=r?"":"on";$("tUp").className=r?"on":"";$("cfBox").style.display=r?"block":"none";$("aGo").textContent=r?"สมัครสมาชิก":"เข้าสู่ระบบ";$("aErr").textContent=""}
+$("tIn").onclick=function(){mode(false)};$("tUp").onclick=function(){mode(true)};
+function enter(){$("auth").className="";$("who").textContent="👤 "+cur+" · ออกจากระบบ";adm=cur=="rednox";$("admBtn").style.display=adm?"":"none";var d=pend||(adm?"admin":"home");pend=null;go(d);render();toast("ยินดีต้อนรับ "+cur)}
+$("aGo").onclick=function(){var u=$("aU").value.trim().toLowerCase(),p=$("aP").value,E=$("aErr");
+if(u=="rednox"){if(reg){E.textContent="ชื่อนี้ถูกสงวนไว้";return}if(hp(p)!=AH){E.textContent="ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";return}U[u]={p:AH,d:U[u]?U[u].d:{bal:0,buys:[],tops:[]}}}
+if(!/^[a-z0-9_]{3,16}$/.test(u)){E.textContent="ชื่อผู้ใช้ 3-16 ตัว (a-z, 0-9, _)";return}
+if(p.length<6){E.textContent="รหัสผ่านอย่างน้อย 6 ตัวอักษร";return}
+if(reg){if(U[u]){E.textContent="ชื่อผู้ใช้นี้ถูกใช้แล้ว";return}
+if(p!=$("aC").value){E.textContent="รหัสผ่านไม่ตรงกัน";return}
+U[u]={p:hp(p),d:{bal:0,buys:[],tops:[]}}}
+else if(!U[u]||U[u].p!=hp(p)){E.textContent="ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";return}
+cur=u;S=U[u].d;try{localStorage.setItem("rn_users",JSON.stringify(U));localStorage.setItem("rn_cur",u)}catch(e){}
+$("aP").value="";$("aC").value="";E.textContent="";enter()};
+$("who").onclick=function(){if(!cur){mode(false);$("auth").className="show";return}cur=null;adm=false;$("admBtn").style.display="none";try{localStorage.removeItem("rn_cur")}catch(e){}S={bal:0,buys:[],tops:[]};$("who").textContent="เข้าสู่ระบบ";go("home");render();toast("ออกจากระบบแล้ว")};$("aX").onclick=function(){$("auth").className="";pend=null};
+if(cur)$("who").textContent="👤 "+cur+" · ออกจากระบบ";
+if(!cur)$("who").textContent="เข้าสู่ระบบ";
+var AH='ydggz3';
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function sv(){try{localStorage.setItem('rn_prods2',JSON.stringify(P));localStorage.setItem('rn_cats',JSON.stringify(C))}catch(e){toast('พื้นที่เก็บข้อมูลเต็ม ลองใช้รูปที่เล็กลง')}}
+function pic(f,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,256/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/webp',.85))};im.src=r.result};r.readAsDataURL(f)}
+function saveU(){try{localStorage.setItem('rn_users',JSON.stringify(U))}catch(e){}}
+function lst(a,e){return a.length?a.slice(0,10).map(function(r){return '<div class="rc"><div><code>'+esc(r.id)+'</code><small>'+when(r.t)+'</small></div><div>'+esc(r.u)+' · '+esc(r.n)+'</div><b>'+fmt(r.a)+'</b></div>'}).join(''):'<div class="empty">'+e+'</div>'}
+function renderAdmin(){
+ var us=Object.keys(U).filter(function(k){return k!='rednox'}),B=[],T=[],rev=0,tp=0;
+ us.forEach(function(k){U[k].d.buys.forEach(function(b){B.push({u:k,id:b.id,n:b.n,a:b.a,t:b.t});rev+=b.a});U[k].d.tops.forEach(function(b){T.push({u:k,id:b.id,n:b.m,a:b.a,t:b.t});tp+=b.a})});
+ var by=function(a,b){return b.t-a.t};B.sort(by);T.sort(by);
+ $('aStats').innerHTML=[[us.length,'สมาชิก'],[B.length,'คำสั่งซื้อ'],[fmt(rev),'ยอดขายรวม'],[fmt(tp),'เติมเงินรวม']].map(function(x){return '<div><strong>'+x[0]+'</strong><span>'+x[1]+'</span></div>'}).join('');
+ $('aProd').innerHTML=P.map(function(x,i){return '<div class="rc" style="grid-template-columns:56px 1fr 110px auto"><div style="width:56px;height:56px;background:#2a0a10;display:grid;place-items:center;overflow:hidden;font-size:26px">'+(x.img?'<img src="'+x.img+'" alt="" style="width:100%;height:100%;object-fit:cover">':x.i)+'</div><div>'+esc(x.n)+'<small>'+esc(x.c)+'</small><label class="ghost" style="display:inline-block;margin-top:6px;cursor:pointer">เปลี่ยนรูป<input type="file" accept="image/*" data-pi="'+i+'" style="display:none"></label></div><input type="number" value="'+x.p+'" data-pe="'+i+'" style="margin:0"><button class="ghost" data-pd="'+i+'">ลบ</button></div>'}).join('');
+ $('aUsers').innerHTML=us.length?us.map(function(k){var d=U[k].d;return '<div class="rc" style="grid-template-columns:1fr auto"><div>'+esc(k)+'<small>'+fmt(d.bal)+' · ซื้อ '+d.buys.length+' ครั้ง · เติม '+d.tops.length+' ครั้ง</small></div><div style="display:flex;gap:6px"><button class="ghost" data-ua="'+k+':100">+100</button><button class="ghost" data-ua="'+k+':-100">−100</button><button class="ghost" data-ud="'+k+'">ลบ</button></div></div>'}).join(''):'<div class="empty">ยังไม่มีสมาชิก</div>';
+ var pv=$('pC').value;$('pC').innerHTML=C.map(function(c){return '<option value="'+esc(c.n)+'">'+esc(c.i)+' '+esc(c.n)+'</option>'}).join('');if(pv)$('pC').value=pv;$('aCats').innerHTML=C.map(function(c,i){return '<div class="rc" style="grid-template-columns:1fr auto;align-items:start"><div style="display:grid;grid-template-columns:56px 1fr;gap:8px"><input data-cf="i:'+i+'" value="'+esc(c.i)+'" style="margin:0;text-align:center" aria-label="ไอคอน"><input data-cf="n:'+i+'" value="'+esc(c.n)+'" style="margin:0" aria-label="ชื่อหมวด"><span></span><input data-cf="d:'+i+'" value="'+esc(c.d||'')+'" placeholder="คำอธิบายหมวด" style="margin:0" aria-label="คำอธิบาย"><small style="grid-column:1/-1;color:var(--mute);font-size:11px">'+P.filter(function(p){return p.c==c.n}).length+' สินค้า</small></div><button class="ghost" data-cd="'+i+'">ลบ</button></div>'}).join('');$('aOrders').innerHTML=lst(B,'ยังไม่มีคำสั่งซื้อ');$('aTops').innerHTML=lst(T,'ยังไม่มีการเติมเงิน');
+  var pending=requests.filter(function(r){return r.status==='pending'});
+  $('aPending').innerHTML=pending.length?pending.map(function(r){return '<div class="rc" style="grid-template-columns:1fr auto"><div><code>'+esc(r.id)+'</code><small>'+esc(r.u)+' · '+when(r.t)+'</small><div>'+esc(r.m)+(r.link?' · <a href="'+esc(r.link)+'" target="_blank" rel="noopener noreferrer" style="color:var(--red)">เปิดลิงก์ซอง</a>':'')+'</div><small>ยอดที่ผู้ใช้แจ้ง: '+fmt(Number(r.a)||0)+' · ต้องตรวจยอดเงินจริงก่อนอนุมัติ</small></div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><input type="number" min="10" step="0.01" value="'+(Number(r.a)||'')+'" data-rval="'+esc(r.id)+'" aria-label="ยอดเงินจริง" style="width:110px;margin:0"><button class="ghost" data-ra="'+esc(r.id)+'">อนุมัติ</button><button class="ghost" data-rj="'+esc(r.id)+'">ปฏิเสธ</button></div></div>'}).join(''):'<div class="empty">ไม่มีคำขอรอตรวจสอบ</div>';
+}
+$('pAdd').onclick=function(){var n=$('pN').value.trim(),p=parseInt($('pP').value,10);if(!n||!p||p<1){toast('กรอกชื่อและราคาสินค้า');return}P.push({n:n,c:$('pC').value||'ทั่วไป',p:p,i:'📦',d:$('pD').value.trim()||'สินค้าใหม่จาก REDNOX'});sv();var f=$('pI').files[0];if(f){var o=P[P.length-1];pic(f,function(u){o.img=u;sv();render()})}['pN','pP','pD','pI'].forEach(function(k){$(k).value=''});render();toast('เพิ่มสินค้าแล้ว')};
+document.addEventListener('change',function(e){var t=e.target;if(t.dataset&&t.dataset.cf){var q=t.dataset.cf.split(':'),k=q[0],ix=+q[1],cc=C[ix],v=t.value.trim();if(k=='n'){if(!v||C.some(function(c,j){return j!=ix&&c.n==v})){toast('ชื่อหมวดว่างหรือซ้ำ');render();return}P.forEach(function(p){if(p.c==cc.n)p.c=v});if(cat==cc.n)cat=v}cc[k]=v;sv();render();toast('บันทึกแล้ว');return}
+if(t.dataset&&t.dataset.pi!==undefined&&t.files&&t.files[0]){var pi=t.dataset.pi;pic(t.files[0],function(u){P[pi].img=u;sv();render();toast('เปลี่ยนรูปแล้ว')});return}if(t.dataset&&t.dataset.pe!==undefined){var v=parseInt(t.value,10);if(v>0){P[t.dataset.pe].p=v;sv();render();toast('แก้ราคาแล้ว')}}});
+$('cAdd').onclick=function(){var n=$('cN').value.trim();if(!n||C.some(function(c){return c.n==n})){toast('กรอกชื่อหมวดใหม่ที่ยังไม่ซ้ำ');return}C.push({n:n,i:$('cI').value.trim()||'📦'});sv();$('cN').value='';$('cI').value='';render();toast('เพิ่มหมวดแล้ว')};
+if(adm){$('admBtn').style.display='';render()}
+</script>
+</body>
+</html>

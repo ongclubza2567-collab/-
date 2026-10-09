@@ -1,0 +1,16 @@
+{
+  "name": "rednox-deploy-starter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REDNOX website hosting and API starter",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
